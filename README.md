@@ -44,7 +44,7 @@
 - **Dark Mode**: Full dark mode support
 
 ### 🏗️ **Architecture**
-- **Post-MVVM**: Modern architecture using SwiftUI's @Observable
+- **Post-MVVM**: Modern architecture using SwiftUI's @Observable, inspired by [Thomas Ricouard's approach](https://dimillian.medium.com/swiftui-in-2025-forget-mvvm-262ff2bbd2ed)
 - **Modular Design**: Separated business logic in ArxivKit framework
 - **Dependency Injection**: Environment-based service injection
 - **Error Handling**: Comprehensive error states with retry functionality
@@ -150,6 +150,17 @@ arxiv-clarity-ios/
 - **PaperDetailView**: Comprehensive paper details with download, browser reading, and sharing options
 
 ## 🔧 Technical Details
+
+### Modern SwiftUI Architecture
+
+Clarity follows a **post-MVVM architecture** as advocated by [Thomas Ricouard](https://dimillian.medium.com/swiftui-in-2025-forget-mvvm-262ff2bbd2ed), leveraging SwiftUI's native capabilities:
+
+- **@Observable State Management**: Using Swift's modern `@Observable` macro instead of traditional ViewModels
+- **Direct Data Flow**: Views directly observe and interact with business logic services
+- **Simplified Architecture**: No unnecessary abstraction layers between views and data
+- **SwiftUI-First Design**: Built specifically for SwiftUI's declarative paradigm
+
+This approach eliminates the complexity of MVVM while maintaining clean separation of concerns and testability.
 
 ### Dependencies
 - **[ArxivSwift](https://github.com/pedrocid/ArxivSwift)**: Swift library for ArXiv API integration
