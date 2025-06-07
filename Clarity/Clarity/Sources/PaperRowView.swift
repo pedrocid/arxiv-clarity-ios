@@ -27,7 +27,7 @@ struct PaperRowView: View {
                 Spacer()
                 
                 if let primaryCategory = paper.primaryCategory {
-                    Text(primaryCategory)
+                    Text(primaryCategory.term)
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 2)

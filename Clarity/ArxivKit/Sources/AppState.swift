@@ -2,7 +2,6 @@ import Foundation
 import SwiftUI
 import ArxivSwift
 
-@MainActor
 @Observable
 public class AppState {
     
@@ -30,10 +29,12 @@ public class AppState {
     public init() {}
     
     // MARK: - Helper Methods
+    @MainActor
     public func clearError() {
         errorMessage = nil
     }
     
+    @MainActor
     public func setLoading(_ loading: Bool) {
         isLoading = loading
         if loading {
@@ -41,11 +42,13 @@ public class AppState {
         }
     }
     
+    @MainActor
     public func setError(_ error: Error) {
         errorMessage = error.localizedDescription
         isLoading = false
     }
     
+    @MainActor
     public func setPapers(_ newPapers: [ArxivEntry]) {
         papers = newPapers
         isLoading = false

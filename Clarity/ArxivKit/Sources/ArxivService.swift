@@ -1,44 +1,48 @@
 import Foundation
 import ArxivSwift
 
-@MainActor
 public class ArxivService {
     
-    public init() {}
+    private let client: ArxivClient
+    
+    public init() {
+        self.client = ArxivClient()
+    }
     
     /// Fetch the latest papers from a specific category
+    @MainActor
     public func getLatest(forCategory category: String = "cs", maxResults: Int = 20) async throws -> [ArxivEntry] {
-        let query = "cat:\(category)"
-        return try await Arxiv.query(
-            searchQuery: query,
-            sortBy: .submittedDate,
-            sortOrder: .descending,
-            maxResults: maxResults
-        )
+        return try await client.getLatestEntries(maxResults: maxResults, category: category)
     }
     
     /// Perform a search query with optional category filter
+    @MainActor
     public func performQuery(
         searchQuery: String,
         category: String? = nil,
-        sortBy: Arxiv.SortBy = .relevance,
-        sortOrder: Arxiv.SortOrder = .descending,
+        sortBy: SortBy = .relevance,
+        sortOrder: ArxivSwift.SortOrder = .descending,
         maxResults: Int = 50
     ) async throws -> [ArxivEntry] {
         
-        var finalQuery = searchQuery
+        let query: ArxivQuery
         
-        // Add category filter if specified
         if let category = category, !category.isEmpty {
-            finalQuery = "cat:\(category) AND (\(searchQuery))"
+            // Create a query that combines category and search terms
+            query = ArxivQuery()
+                .addSearch(field: .category, value: category)
+                .addSearch(field: .all, value: searchQuery)
+                .maxResults(maxResults)
+                .sort(by: sortBy, order: sortOrder)
+        } else {
+            // Search all fields
+            query = ArxivQuery()
+                .addSearch(field: .all, value: searchQuery)
+                .maxResults(maxResults)
+                .sort(by: sortBy, order: sortOrder)
         }
         
-        return try await Arxiv.query(
-            searchQuery: finalQuery,
-            sortBy: sortBy,
-            sortOrder: sortOrder,
-            maxResults: maxResults
-        )
+        return try await client.getEntries(for: query)
     }
 }
 

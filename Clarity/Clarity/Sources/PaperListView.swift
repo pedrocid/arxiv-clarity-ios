@@ -7,6 +7,8 @@ struct PaperListView: View {
     @Environment(\.arxivService) private var arxivService
     
     var body: some View {
+        @Bindable var bindableAppState = appState
+        
         NavigationStack {
             Group {
                 if appState.isLoading {
@@ -44,7 +46,7 @@ struct PaperListView: View {
                     }
                 }
             }
-            .searchable(text: $appState.searchText, prompt: "Search papers...")
+            .searchable(text: $bindableAppState.searchText, prompt: "Search papers...")
             .onSubmit(of: .search) {
                 Task {
                     await performSearch()
@@ -87,7 +89,9 @@ struct PaperListView: View {
         do {
             let papers = try await arxivService.performQuery(
                 searchQuery: appState.searchText,
-                category: appState.selectedCategory
+                category: appState.selectedCategory,
+                sortBy: .relevance,
+                sortOrder: .descending
             )
             appState.setPapers(papers)
         } catch {
