@@ -1,0 +1,15 @@
+{
+  "originHash" : "a6f88729dabe475636dbe2fbdeacaa904feace426cb5cf578908d683c27f4e8d",
+  "pins" : [
+    {
+      "identity" : "arxivswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pedrocid/ArxivSwift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "978da83d110c35a2fdbc019d63f7cf0303f5a49c"
+      }
+    }
+  ],
+  "version" : 3
+}
