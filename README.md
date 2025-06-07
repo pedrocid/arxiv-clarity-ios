@@ -12,8 +12,8 @@
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="screenshots/main-screen.png" alt="Main Screen with Paper List" width="300">
-  <img src="screenshots/detail-screen.png" alt="Paper Detail View" width="300">
+  <img src="screenshots/main-screen.png?v=2" alt="Main Screen with Paper List" width="300">
+  <img src="screenshots/detail-screen.png?v=2" alt="Paper Detail View" width="300">
 </div>
 
 *Clarity automatically loads interesting papers on startup and provides detailed paper views with download and browser reading options.*
