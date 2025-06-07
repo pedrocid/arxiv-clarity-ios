@@ -19,6 +19,10 @@ let project = Project(
                             "export.arxiv.org": [
                                 "NSExceptionAllowsInsecureHTTPLoads": true,
                                 "NSExceptionMinimumTLSVersion": "TLSv1.2"
+                            ],
+                            "arxiv.org": [
+                                "NSExceptionAllowsInsecureHTTPLoads": true,
+                                "NSExceptionMinimumTLSVersion": "TLSv1.2"
                             ]
                         ]
                     ]

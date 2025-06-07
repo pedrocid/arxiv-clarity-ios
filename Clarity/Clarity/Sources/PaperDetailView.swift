@@ -7,8 +7,11 @@ struct PaperDetailView: View {
     let paper: ArxivEntry
     @State private var showingSafari = false
     @State private var showingDownloadAlert = false
+    @State private var downloadAlertMessage = ""
     @State private var isDownloading = false
     @State private var showingShareSheet = false
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
     
     var body: some View {
         ScrollView {
@@ -149,7 +152,12 @@ struct PaperDetailView: View {
         .alert("Download Complete", isPresented: $showingDownloadAlert) {
             Button("OK") { }
         } message: {
-            Text("The PDF has been saved to your Files app.")
+            Text(downloadAlertMessage)
+        }
+        .alert("Download Error", isPresented: $showingErrorAlert) {
+            Button("OK") { }
+        } message: {
+            Text(errorMessage)
         }
     }
     
@@ -184,11 +192,14 @@ struct PaperDetailView: View {
                 
                 await MainActor.run {
                     isDownloading = false
+                    downloadAlertMessage = "The PDF has been saved to your Files app."
                     showingDownloadAlert = true
                 }
             } catch {
                 await MainActor.run {
                     isDownloading = false
+                    errorMessage = "Failed to download PDF: \(error.localizedDescription)"
+                    showingErrorAlert = true
                     print("Error downloading PDF: \(error)")
                 }
             }
