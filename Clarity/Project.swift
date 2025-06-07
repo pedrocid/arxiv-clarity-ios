@@ -14,6 +14,14 @@ let project = Project(
                         "UIColorName": "",
                         "UIImageName": "",
                     ],
+                    "NSAppTransportSecurity": [
+                        "NSExceptionDomains": [
+                            "export.arxiv.org": [
+                                "NSExceptionAllowsInsecureHTTPLoads": true,
+                                "NSExceptionMinimumTLSVersion": "TLSv1.0"
+                            ]
+                        ]
+                    ]
                 ]
             ),
             sources: ["Clarity/Sources/**"],
