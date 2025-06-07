@@ -12,12 +12,11 @@
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="screenshots/home-screen.png" alt="Home Screen with Interesting Papers" width="300">
-  <img src="screenshots/search-interface.png" alt="Search Interface" width="300">
-  <img src="screenshots/paper-list.png" alt="Paper List View" width="300">
+  <img src="screenshots/main-screen.png" alt="Main Screen with Paper List" width="300">
+  <img src="screenshots/detail-screen.png" alt="Paper Detail View" width="300">
 </div>
 
-*Clarity automatically loads interesting papers on startup, provides powerful search capabilities, and displays papers in a clean, readable format.*
+*Clarity automatically loads interesting papers on startup and provides detailed paper views with download and browser reading options.*
 
 ## ✨ Features
 
@@ -31,6 +30,13 @@
 - **Category Filtering**: Filter by specific ArXiv categories (AI, ML, Computer Vision, etc.)
 - **Smart Results**: Relevance-based sorting with recent papers prioritized
 
+### 📄 **Detailed Paper Views**
+- **Comprehensive Information**: View full paper details including title, authors, abstract, and categories
+- **PDF Download**: Download papers directly to your device for offline reading
+- **Browser Reading**: Open papers in Safari for online reading with full ArXiv functionality
+- **Easy Sharing**: Copy ArXiv URLs to share papers with colleagues
+- **Publication Info**: See publication and update dates with ArXiv ID for reference
+
 ### 🎨 **Modern Design**
 - **SwiftUI Native**: Built entirely with SwiftUI for smooth, native performance
 - **Clean Interface**: Minimalist design focused on readability
@@ -42,6 +48,25 @@
 - **Modular Design**: Separated business logic in ArxivKit framework
 - **Dependency Injection**: Environment-based service injection
 - **Error Handling**: Comprehensive error states with retry functionality
+
+## 📖 How to Use
+
+### Browsing Papers
+1. **Launch the app** - Clarity automatically loads interesting papers from various categories
+2. **Browse the list** - Scroll through the curated selection of recent papers
+3. **Tap any paper** - Navigate to the detailed view for comprehensive information
+
+### Paper Detail View
+- **Read the full abstract** - Get complete paper summaries with proper formatting
+- **View author information** - See all authors and publication details
+- **Check categories** - Understand the paper's subject classifications
+- **Download PDF** - Save papers locally for offline reading
+- **Read in browser** - Open the full ArXiv page in Safari
+- **Copy URL** - Share paper links easily
+
+### Search & Discovery
+- **Use the search bar** - Find papers by title, author, or keywords
+- **Pull to refresh** - Get the latest papers and discoveries
 
 ## 🚀 Getting Started
 
@@ -91,10 +116,11 @@
 arxiv-clarity-ios/
 ├── Clarity/                    # Main iOS App Target
 │   ├── Sources/
-│   │   ├── ClarityApp.swift   # App entry point
-│   │   ├── PaperListView.swift # Main paper list
-│   │   └── PaperRowView.swift  # Individual paper row
-│   └── Resources/             # App resources
+│   │   ├── ClarityApp.swift     # App entry point
+│   │   ├── PaperListView.swift  # Main paper list
+│   │   ├── PaperRowView.swift   # Individual paper row
+│   │   └── PaperDetailView.swift # Detailed paper view
+│   └── Resources/               # App resources
 ├── ArxivKit/                  # Business Logic Framework
 │   ├── Sources/
 │   │   ├── ArxivService.swift # API service layer
@@ -119,8 +145,9 @@ arxiv-clarity-ios/
 - Provides helper methods for state updates
 
 #### 🎨 **Views**
-- **PaperListView**: Main interface with search, filtering, and paper list
+- **PaperListView**: Main interface with search, filtering, and paper list with navigation to detail views
 - **PaperRowView**: Individual paper display with title, authors, and category badge
+- **PaperDetailView**: Comprehensive paper details with download, browser reading, and sharing options
 
 ## 🔧 Technical Details
 

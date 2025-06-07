@@ -55,7 +55,9 @@ struct PaperListView: View {
                     .padding()
                 } else {
                     List(appState.papers, id: \.id) { paper in
-                        PaperRowView(paper: paper)
+                        NavigationLink(destination: PaperDetailView(paper: paper)) {
+                            PaperRowView(paper: paper)
+                        }
                     }
                     .refreshable {
                         if appState.searchText.isEmpty {
