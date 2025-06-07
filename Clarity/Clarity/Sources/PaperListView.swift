@@ -3,41 +3,104 @@ import ArxivKit
 import ArxivSwift
 
 struct PaperListView: View {
-    @Environment(AppState.self) private var appState
+    @Environment(\.appState) private var appState
     @Environment(\.arxivService) private var arxivService
+    @Bindable private var bindableAppState: AppState
+    
+    init() {
+        @Environment(\.appState) var appState
+        self.bindableAppState = appState
+    }
     
     var body: some View {
-        @Bindable var bindableAppState = appState
-        
         NavigationStack {
             Group {
                 if appState.isLoading {
-                    ProgressView("Loading papers...")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if appState.papers.isEmpty {
-                    ContentUnavailableView(
-                        "No Papers Found",
-                        systemImage: "doc.text.magnifyingglass",
-                        description: Text("Try adjusting your search or category filter")
-                    )
+                    VStack {
+                        ProgressView()
+                        Text("Loading papers...")
+                            .foregroundColor(.secondary)
+                    }
+                } else if appState.papers.isEmpty && appState.errorMessage == nil {
+                    VStack {
+                        Image(systemName: "doc.text.magnifyingglass")
+                            .font(.system(size: 50))
+                            .foregroundColor(.secondary)
+                        Text("Welcome to Clarity")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text("Discovering interesting papers...")
+                            .foregroundColor(.secondary)
+                    }
+                } else if let errorMessage = appState.errorMessage {
+                    VStack {
+                        Image(systemName: "exclamationmark.triangle")
+                            .font(.system(size: 50))
+                            .foregroundColor(.orange)
+                        Text("Error")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text(errorMessage)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                        
+                        Button("Retry") {
+                            Task {
+                                await loadDefaultPapers()
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding(.top)
+                    }
+                    .padding()
                 } else {
                     List(appState.papers, id: \.id) { paper in
                         PaperRowView(paper: paper)
                     }
                     .refreshable {
-                        await loadLatestPapers()
+                        if appState.searchText.isEmpty {
+                            await loadDefaultPapers()
+                        } else {
+                            await performSearch()
+                        }
                     }
                 }
             }
-            .navigationTitle("Clarity")
+            .navigationTitle("ArXiv Papers")
+            .searchable(text: $bindableAppState.searchText, prompt: "Search papers...")
+            .onSubmit(of: .search) {
+                Task {
+                    await performSearch()
+                }
+            }
+            .onChange(of: appState.searchText) { oldValue, newValue in
+                if newValue.isEmpty && !oldValue.isEmpty {
+                    // User cleared search, reload default papers
+                    Task {
+                        await loadDefaultPapers()
+                    }
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
-                        ForEach(appState.availableCategories, id: \.0) { category in
-                            Button(category.1) {
-                                appState.selectedCategory = category.0
+                        ForEach(appState.availableCategories, id: \.0) { category, name in
+                            Button(action: {
+                                appState.selectedCategory = category
                                 Task {
-                                    await loadLatestPapers()
+                                    if appState.searchText.isEmpty {
+                                        await loadDefaultPapers()
+                                    } else {
+                                        await performSearch()
+                                    }
+                                }
+                            }) {
+                                HStack {
+                                    Text(name)
+                                    if appState.selectedCategory == category {
+                                        Spacer()
+                                        Image(systemName: "checkmark")
+                                    }
                                 }
                             }
                         }
@@ -46,33 +109,24 @@ struct PaperListView: View {
                     }
                 }
             }
-            .searchable(text: $bindableAppState.searchText, prompt: "Search papers...")
-            .onSubmit(of: .search) {
-                Task {
-                    await performSearch()
-                }
-            }
-            .task {
-                await loadLatestPapers()
-            }
-            .alert("Error", isPresented: .constant(appState.errorMessage != nil)) {
-                Button("OK") {
-                    appState.clearError()
-                }
-            } message: {
-                Text(appState.errorMessage ?? "")
-            }
+        }
+        .task {
+            // Load interesting papers when the app opens
+            await loadDefaultPapers()
         }
     }
     
     @MainActor
-    private func loadLatestPapers() async {
+    private func loadDefaultPapers() async {
+        print("🚀 PaperListView: Loading default papers")
         appState.setLoading(true)
         
         do {
-            let papers = try await arxivService.getLatest(forCategory: appState.selectedCategory)
+            // Load interesting papers for a diverse and engaging experience
+            let papers = try await arxivService.getInterestingPapers(maxResults: 20)
             appState.setPapers(papers)
         } catch {
+            print("❌ PaperListView: Error loading default papers: \(error)")
             appState.setError(error)
         }
     }
@@ -80,22 +134,29 @@ struct PaperListView: View {
     @MainActor
     private func performSearch() async {
         guard !appState.searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            await loadLatestPapers()
+            await loadDefaultPapers()
             return
         }
         
+        print("🔍 PaperListView: Performing search for: '\(appState.searchText)'")
         appState.setLoading(true)
         
         do {
             let papers = try await arxivService.performQuery(
                 searchQuery: appState.searchText,
                 category: appState.selectedCategory,
-                sortBy: .relevance,
-                sortOrder: .descending
+                maxResults: 50
             )
             appState.setPapers(papers)
         } catch {
+            print("❌ PaperListView: Error performing search: \(error)")
             appState.setError(error)
         }
     }
+}
+
+#Preview {
+    PaperListView()
+        .environment(\.appState, AppState())
+        .environment(\.arxivService, ArxivService())
 } 

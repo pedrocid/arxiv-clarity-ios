@@ -12,18 +12,19 @@ public class AppState {
     
     // MARK: - Search State
     public var searchText: String = ""
-    public var selectedCategory: String = "cs"
+    public var selectedCategory: String = "cs.AI"
     
     // MARK: - Available Categories
     public let availableCategories = [
-        ("cs", "Computer Science"),
-        ("physics", "Physics"),
-        ("math", "Mathematics"),
-        ("q-bio", "Quantitative Biology"),
-        ("q-fin", "Quantitative Finance"),
-        ("stat", "Statistics"),
-        ("eess", "Electrical Engineering"),
-        ("econ", "Economics")
+        ("cs.AI", "Artificial Intelligence"),
+        ("cs.LG", "Machine Learning"),
+        ("cs.CV", "Computer Vision"),
+        ("cs.CL", "Computation and Language"),
+        ("cs.CR", "Cryptography and Security"),
+        ("physics.gen-ph", "General Physics"),
+        ("math.CO", "Combinatorics"),
+        ("q-bio.QM", "Quantitative Methods"),
+        ("stat.ML", "Machine Learning (Statistics)")
     ]
     
     public init() {}
@@ -36,6 +37,7 @@ public class AppState {
     
     @MainActor
     public func setLoading(_ loading: Bool) {
+        print("📱 AppState: Setting loading to \(loading)")
         isLoading = loading
         if loading {
             errorMessage = nil
@@ -44,12 +46,14 @@ public class AppState {
     
     @MainActor
     public func setError(_ error: Error) {
+        print("❌ AppState: Setting error: \(error.localizedDescription)")
         errorMessage = error.localizedDescription
         isLoading = false
     }
     
     @MainActor
     public func setPapers(_ newPapers: [ArxivEntry]) {
+        print("📄 AppState: Setting \(newPapers.count) papers")
         papers = newPapers
         isLoading = false
         errorMessage = nil
