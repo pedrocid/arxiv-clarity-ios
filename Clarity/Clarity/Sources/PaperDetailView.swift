@@ -8,6 +8,7 @@ struct PaperDetailView: View {
     @State private var showingSafari = false
     @State private var showingDownloadAlert = false
     @State private var isDownloading = false
+    @State private var showingShareSheet = false
     
     var body: some View {
         ScrollView {
@@ -100,69 +101,50 @@ struct PaperDetailView: View {
                         .lineSpacing(4)
                         .textSelection(.enabled)
                 }
-                
-                // Action Buttons
-                VStack(spacing: 12) {
-                    // Read in Browser Button
-                    Button(action: {
-                        showingSafari = true
-                    }) {
-                        HStack {
-                            Image(systemName: "safari")
-                            Text("Read in Browser")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                    }
-                    
-                    // Download PDF Button
-                    Button(action: {
-                        downloadPDF()
-                    }) {
-                        HStack {
-                            if isDownloading {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            } else {
-                                Image(systemName: "arrow.down.doc")
-                            }
-                            Text(isDownloading ? "Downloading..." : "Download PDF")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                    }
-                    .disabled(isDownloading)
-                    
-                    // Copy ArXiv URL Button
-                    Button(action: {
-                        copyArxivURL()
-                    }) {
-                        HStack {
-                            Image(systemName: "doc.on.doc")
-                            Text("Copy ArXiv URL")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.primary)
-                        .cornerRadius(10)
-                    }
-                }
-                .padding(.top)
             }
             .padding()
         }
         .navigationTitle("Paper Details")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Menu {
+                    Button(action: {
+                        showingSafari = true
+                    }) {
+                        Label("Read in Browser", systemImage: "safari")
+                    }
+                    
+                    Button(action: {
+                        downloadPDF()
+                    }) {
+                        Label(isDownloading ? "Downloading..." : "Download PDF", 
+                              systemImage: isDownloading ? "arrow.down.circle" : "arrow.down.doc")
+                    }
+                    .disabled(isDownloading)
+                    
+                    Button(action: {
+                        copyArxivURL()
+                    }) {
+                        Label("Copy ArXiv URL", systemImage: "doc.on.doc")
+                    }
+                    
+                    Button(action: {
+                        showingShareSheet = true
+                    }) {
+                        Label("Share", systemImage: "square.and.arrow.up")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .font(.title2)
+                }
+            }
+        }
         .sheet(isPresented: $showingSafari) {
             SafariView(url: arxivURL)
+        }
+        .sheet(isPresented: $showingShareSheet) {
+            ShareSheet(items: [arxivURL])
         }
         .alert("Download Complete", isPresented: $showingDownloadAlert) {
             Button("OK") { }
@@ -227,6 +209,20 @@ struct SafariView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
+        // No updates needed
+    }
+}
+
+// Share Sheet for native iOS sharing
+struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
         // No updates needed
     }
 }

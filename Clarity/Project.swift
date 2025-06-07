@@ -50,7 +50,12 @@ let project = Project(
             infoPlist: .default,
             sources: ["Clarity/Tests/**"],
             resources: [],
-            dependencies: [.target(name: "Clarity")]
+            dependencies: [.target(name: "Clarity")],
+            settings: .settings(
+                base: [
+                    "ENABLE_TESTING_SEARCH_PATHS": "YES"
+                ]
+            )
         ),
         .target(
             name: "ArxivKitTests",
@@ -60,7 +65,12 @@ let project = Project(
             infoPlist: .default,
             sources: ["ArxivKit/Tests/**"],
             resources: [],
-            dependencies: [.target(name: "ArxivKit")]
+            dependencies: [.target(name: "ArxivKit")],
+            settings: .settings(
+                base: [
+                    "ENABLE_TESTING_SEARCH_PATHS": "YES"
+                ]
+            )
         ),
     ]
 )
