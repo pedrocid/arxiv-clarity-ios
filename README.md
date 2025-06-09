@@ -1,6 +1,8 @@
-# Clarity - ArXiv iOS Client
-
 <div align="center">
+  <img src="app-icon.png" alt="Clarity App Icon" width="120" height="120">
+  
+  # Clarity - ArXiv iOS Client
+  
   **A modern, elegant iOS client for browsing ArXiv papers**
   
   [![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
