@@ -14,57 +14,101 @@ struct PaperListView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
-                if appState.isLoading {
-                    VStack {
-                        ProgressView()
-                        Text("Loading papers...")
-                            .foregroundColor(.secondary)
-                    }
-                } else if appState.papers.isEmpty && appState.errorMessage == nil {
-                    VStack {
-                        Image(systemName: "doc.text.magnifyingglass")
-                            .font(.system(size: 50))
-                            .foregroundColor(.secondary)
-                        Text("Welcome to Clarity")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        Text("Discovering interesting papers...")
-                            .foregroundColor(.secondary)
-                    }
-                } else if let errorMessage = appState.errorMessage {
-                    VStack {
-                        Image(systemName: "exclamationmark.triangle")
-                            .font(.system(size: 50))
-                            .foregroundColor(.orange)
-                        Text("Error")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                        Text(errorMessage)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                        
-                        Button("Retry") {
-                            Task {
-                                await loadDefaultPapers()
+            ZStack {
+                // Subtle background pattern
+                Image("background-pattern")
+                    .resizable(resizingMode: .tile)
+                    .opacity(0.03)
+                    .ignoresSafeArea()
+                
+                Group {
+                    if appState.isLoading {
+                        VStack(spacing: 20) {
+                            Image("loading-state")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
+                            
+                            ProgressView()
+                            
+                            Text("Loading papers...")
+                                .font(.headline)
+                                .foregroundColor(.secondary)
+                            
+                            Text("Discovering the latest research...")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                    } else if appState.papers.isEmpty && appState.errorMessage == nil {
+                        VStack(spacing: 20) {
+                            if appState.searchText.isEmpty {
+                                // Welcome state when no search is active
+                                Image("welcome-illustration")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 150, height: 150)
+                                
+                                Text("Welcome to Clarity")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                
+                                Text("Discovering interesting papers...")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            } else {
+                                // Empty search results state
+                                Image("empty-state")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 120, height: 120)
+                                
+                                Text("No Results Found")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                
+                                Text("Try adjusting your search terms or browse different categories")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
                             }
                         }
-                        .buttonStyle(.borderedProminent)
-                        .padding(.top)
-                    }
-                    .padding()
-                } else {
-                    List(appState.papers, id: \.id) { paper in
-                        NavigationLink(destination: PaperDetailView(paper: paper)) {
-                            PaperRowView(paper: paper)
+                        .padding()
+                    } else if let errorMessage = appState.errorMessage {
+                        VStack {
+                            Image(systemName: "exclamationmark.triangle")
+                                .font(.system(size: 50))
+                                .foregroundColor(.orange)
+                            Text("Error")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Text(errorMessage)
+                                .foregroundColor(.secondary)
+                                .multilineTextAlignment(.center)
+                            
+                            Button("Retry") {
+                                Task {
+                                    await loadDefaultPapers()
+                                }
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .padding(.top)
                         }
-                    }
-                    .refreshable {
-                        if appState.searchText.isEmpty {
-                            await loadDefaultPapers()
-                        } else {
-                            await performSearch()
+                        .padding()
+                    } else {
+                        List(appState.papers, id: \.id) { paper in
+                            NavigationLink(destination: PaperDetailView(paper: paper)) {
+                                PaperRowView(paper: paper)
+                            }
                         }
+                        .refreshable {
+                            if appState.searchText.isEmpty {
+                                await loadDefaultPapers()
+                            } else {
+                                await performSearch()
+                            }
+                        }
+                        .scrollContentBackground(.hidden)
                     }
                 }
             }
