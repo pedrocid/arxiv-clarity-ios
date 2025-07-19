@@ -23,57 +23,74 @@ struct PaperListView: View {
                 
                 Group {
                     if appState.isLoading {
-                        VStack(spacing: 20) {
+                        VStack(spacing: 24) {
                             Image("loading-state")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 120, height: 120)
+                                .opacity(0.8)
                             
                             ProgressView()
+                                .scaleEffect(1.2)
+                                .tint(.blue)
                             
-                            Text("Loading papers...")
-                                .font(.headline)
-                                .foregroundColor(.secondary)
-                            
-                            Text("Discovering the latest research...")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                            VStack(spacing: 8) {
+                                Text("Loading papers...")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.primary)
+                                
+                                Text("Discovering the latest research...")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                            }
                         }
                         .padding()
+                        .transition(.opacity)
                     } else if appState.papers.isEmpty && appState.errorMessage == nil {
-                        VStack(spacing: 20) {
+                        VStack(spacing: 24) {
                             if appState.searchText.isEmpty {
                                 // Welcome state when no search is active
                                 Image("welcome-illustration")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 150, height: 150)
+                                    .opacity(0.9)
                                 
-                                Text("Welcome to Clarity")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                
-                                Text("Discovering interesting papers...")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                                VStack(spacing: 8) {
+                                    Text("Welcome to Clarity")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.primary)
+                                    
+                                    Text("Discovering interesting papers...")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
                             } else {
                                 // Empty search results state
                                 Image("empty-state")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 120, height: 120)
+                                    .opacity(0.8)
                                 
-                                Text("No Results Found")
-                                    .font(.title2)
-                                    .fontWeight(.semibold)
-                                
-                                Text("Try adjusting your search terms or browse different categories")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
-                                    .multilineTextAlignment(.center)
+                                VStack(spacing: 8) {
+                                    Text("No Results Found")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.primary)
+                                    
+                                    Text("Try adjusting your search terms or browse different categories")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                        .multilineTextAlignment(.center)
+                                        .padding(.horizontal, 20)
+                                }
                             }
                         }
                         .padding()
+                        .transition(.opacity)
                     } else if let errorMessage = appState.errorMessage {
                         VStack {
                             Image(systemName: "exclamationmark.triangle")
@@ -99,8 +116,12 @@ struct PaperListView: View {
                         List(appState.papers, id: \.id) { paper in
                             NavigationLink(destination: PaperDetailView(paper: paper)) {
                                 PaperRowView(paper: paper)
+                                    .listRowInsets(EdgeInsets())
+                                    .listRowSeparator(.hidden)
                             }
                         }
+                        .listStyle(.plain)
+                        .scrollContentBackground(.hidden)
                         .refreshable {
                             if appState.searchText.isEmpty {
                                 await loadDefaultPapers()
@@ -108,11 +129,11 @@ struct PaperListView: View {
                                 await performSearch()
                             }
                         }
-                        .scrollContentBackground(.hidden)
                     }
                 }
             }
             .navigationTitle("ArXiv Papers")
+            .navigationBarTitleDisplayMode(.large)
             .searchable(text: $bindableAppState.searchText, prompt: "Search papers...")
             .onSubmit(of: .search) {
                 Task {
