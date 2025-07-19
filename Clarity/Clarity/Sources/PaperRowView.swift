@@ -5,12 +5,14 @@ struct PaperRowView: View {
     let paper: ArxivEntry
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 12) {
             // Title
             Text(paper.title)
-                .font(.headline)
+                .font(.title3)
+                .fontWeight(.semibold)
                 .lineLimit(3)
                 .multilineTextAlignment(.leading)
+                .foregroundStyle(.primary)
             
             // Authors
             Text(authorsText)
@@ -20,24 +22,51 @@ struct PaperRowView: View {
             
             // Published date and categories
             HStack {
-                Text(formattedDate)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                HStack(spacing: 4) {
+                    Image(systemName: "calendar.badge.clock")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Text(formattedDate)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
                 
                 Spacer()
                 
                 if let primaryCategory = paper.primaryCategory {
                     Text(primaryCategory.term)
                         .font(.caption)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 2)
-                        .background(Color.blue.opacity(0.1))
+                        .fontWeight(.medium)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(
+                            LinearGradient(
+                                colors: [Color.blue.opacity(0.15), Color.blue.opacity(0.08)],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
                         .foregroundColor(.blue)
-                        .cornerRadius(4)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.blue.opacity(0.2), lineWidth: 0.5)
+                        )
                 }
             }
         }
-        .padding(.vertical, 4)
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(.systemBackground))
+                .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(.systemGray5), lineWidth: 0.5)
+                )
+        )
+        .padding(.horizontal, 16)
+        .padding(.vertical, 6)
     }
     
     private var authorsText: String {
