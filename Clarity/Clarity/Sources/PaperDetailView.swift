@@ -34,11 +34,13 @@ struct PaperDetailView: View {
                             Image(systemName: "person.2.fill")
                                 .foregroundStyle(.blue)
                                 .font(.title3)
+                                .accessibilityHidden(true)
                             Text("Authors")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.primary)
                         }
+                        .accessibilityElement(children: .combine)
                         
                         VStack(alignment: .leading, spacing: 8) {
                             ForEach(paper.authors, id: \.name) { author in
@@ -46,10 +48,12 @@ struct PaperDetailView: View {
                                     Circle()
                                         .fill(Color.blue.opacity(0.2))
                                         .frame(width: 6, height: 6)
+                                        .accessibilityHidden(true)
                                     Text(author.name)
                                         .font(.subheadline)
                                         .foregroundColor(.primary)
                                 }
+                                .accessibilityElement(children: .combine)
                             }
                         }
                     }
@@ -65,11 +69,13 @@ struct PaperDetailView: View {
                             Image(systemName: "info.circle.fill")
                                 .foregroundStyle(.green)
                                 .font(.title3)
+                                .accessibilityHidden(true)
                             Text("Publication Details")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.primary)
                         }
+                        .accessibilityElement(children: .combine)
                         
                         VStack(alignment: .leading, spacing: 10) {
                             InfoRow(icon: "calendar", color: .green, label: "Published", value: formattedDate(paper.published))
@@ -94,11 +100,13 @@ struct PaperDetailView: View {
                                 Image(systemName: "tag.fill")
                                     .foregroundStyle(.blue)
                                     .font(.title3)
+                                    .accessibilityHidden(true)
                                 Text("Categories")
                                     .font(.title3)
                                     .fontWeight(.semibold)
                                     .foregroundColor(.primary)
                             }
+                            .accessibilityElement(children: .combine)
                             
                             LazyVGrid(columns: [
                                 GridItem(.adaptive(minimum: 120))
@@ -138,11 +146,13 @@ struct PaperDetailView: View {
                             Image(systemName: "doc.text.fill")
                                 .foregroundStyle(.purple)
                                 .font(.title3)
+                                .accessibilityHidden(true)
                             Text("Abstract")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.primary)
                         }
+                        .accessibilityElement(children: .combine)
                         
                         Text(paper.abstract)
                             .font(.body)
@@ -325,6 +335,7 @@ struct InfoRow: View {
                 .foregroundStyle(color)
                 .font(.system(size: 16, weight: .medium))
                 .frame(width: 20)
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(label)
@@ -346,6 +357,7 @@ struct InfoRow: View {
             
             Spacer()
         }
+        .accessibilityElement(children: .combine)
     }
 }
 
