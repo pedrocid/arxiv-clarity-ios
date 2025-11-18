@@ -5,68 +5,98 @@ struct PaperRowView: View {
     let paper: ArxivEntry
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             // Title
             Text(paper.title)
-                .font(.title3)
-                .fontWeight(.semibold)
+                .font(.system(.title3, design: .serif)) // Serif font for academic feel
+                .fontWeight(.bold)
                 .lineLimit(3)
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.primary)
+                .fixedSize(horizontal: false, vertical: true)
             
             // Authors
-            Text(authorsText)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .lineLimit(2)
+            HStack(alignment: .top, spacing: 6) {
+                Image(systemName: "person.2.fill")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .padding(.top, 2)
+                
+                Text(authorsText)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             
-            // Published date and categories
+            Divider()
+                .background(Color.primary.opacity(0.1))
+            
+            // Footer: Date and Category
             HStack {
-                HStack(spacing: 4) {
-                    Image(systemName: "calendar.badge.clock")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                Label {
                     Text(formattedDate)
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .fontWeight(.medium)
+                } icon: {
+                    Image(systemName: "calendar")
+                        .font(.caption)
                 }
+                .foregroundStyle(.secondary)
                 
                 Spacer()
                 
                 if let primaryCategory = paper.primaryCategory {
                     Text(primaryCategory.term)
                         .font(.caption)
-                        .fontWeight(.medium)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
                         .background(
                             LinearGradient(
-                                colors: [Color.blue.opacity(0.15), Color.blue.opacity(0.08)],
+                                colors: [Color.blue, Color.purple],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
+                            .opacity(0.1)
                         )
                         .foregroundColor(.blue)
-                        .cornerRadius(8)
+                        .clipShape(Capsule())
                         .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.blue.opacity(0.2), lineWidth: 0.5)
+                            Capsule()
+                                .strokeBorder(
+                                    LinearGradient(
+                                        colors: [Color.blue.opacity(0.3), Color.purple.opacity(0.3)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 1
+                                )
                         )
                 }
             }
         }
-        .padding(16)
+        .padding(20)
         .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemBackground))
-                .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color(.systemGray5), lineWidth: 0.5)
+            ZStack {
+                Color(.systemBackground)
+                
+                // Subtle gradient overlay
+                LinearGradient(
+                    colors: [Color.blue.opacity(0.02), Color.clear],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
                 )
+            }
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 4)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.primary.opacity(0.05), lineWidth: 1)
         )
         .padding(.horizontal, 16)
-        .padding(.vertical, 6)
+        .padding(.vertical, 8)
     }
     
     private var authorsText: String {
@@ -83,4 +113,4 @@ struct PaperRowView: View {
         formatter.dateStyle = .medium
         return formatter.string(from: paper.published)
     }
-} 
+}
