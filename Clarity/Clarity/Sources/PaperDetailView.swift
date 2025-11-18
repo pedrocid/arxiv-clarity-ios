@@ -33,9 +33,11 @@ struct PaperDetailView: View {
                             Image(systemName: "person.circle.fill")
                                 .foregroundColor(.blue)
                                 .font(.caption)
+                                .accessibilityHidden(true)
                             Text(author.name)
                                 .font(.subheadline)
                         }
+                        .accessibilityElement(children: .combine)
                     }
                 }
                 
@@ -48,26 +50,32 @@ struct PaperDetailView: View {
                     HStack {
                         Image(systemName: "calendar")
                             .foregroundColor(.green)
+                            .accessibilityHidden(true)
                         Text("Published: \(formattedDate(paper.published))")
                             .font(.subheadline)
                     }
+                    .accessibilityElement(children: .combine)
                     
                     if paper.updated != paper.published {
                         HStack {
                             Image(systemName: "arrow.clockwise")
                                 .foregroundColor(.orange)
+                                .accessibilityHidden(true)
                             Text("Updated: \(formattedDate(paper.updated))")
                                 .font(.subheadline)
                         }
+                        .accessibilityElement(children: .combine)
                     }
                     
                     HStack {
                         Image(systemName: "number")
                             .foregroundColor(.purple)
+                            .accessibilityHidden(true)
                         Text("ArXiv ID: \(paper.id)")
                             .font(.subheadline)
                             .textSelection(.enabled)
                     }
+                    .accessibilityElement(children: .combine)
                 }
                 
                 // Categories
