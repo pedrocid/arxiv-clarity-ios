@@ -15,11 +15,27 @@ struct PaperListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Subtle background pattern
-                Image("background-pattern")
-                    .resizable(resizingMode: .tile)
-                    .opacity(0.03)
-                    .ignoresSafeArea()
+                // Modern Background
+                ZStack {
+                    Color(.systemGroupedBackground)
+                        .ignoresSafeArea()
+                    
+                    // Ambient gradients
+                    GeometryReader { proxy in
+                        Circle()
+                            .fill(Color.blue.opacity(0.1))
+                            .frame(width: proxy.size.width * 0.8)
+                            .blur(radius: 60)
+                            .offset(x: -proxy.size.width * 0.2, y: -proxy.size.height * 0.2)
+                        
+                        Circle()
+                            .fill(Color.purple.opacity(0.1))
+                            .frame(width: proxy.size.width * 0.8)
+                            .blur(radius: 60)
+                            .offset(x: proxy.size.width * 0.4, y: proxy.size.height * 0.1)
+                    }
+                }
+                .ignoresSafeArea()
                 
                 Group {
                     if appState.isLoading {
