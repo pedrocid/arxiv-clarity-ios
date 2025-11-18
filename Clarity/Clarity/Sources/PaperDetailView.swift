@@ -15,105 +15,157 @@ struct PaperDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Title
-                Text(paper.title)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
+            VStack(alignment: .leading, spacing: 24) {
+                // Title Section
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(paper.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(.primary)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
                 
-                // Authors
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Authors")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    ForEach(paper.authors, id: \.name) { author in
+                // Authors Section
+                GroupBox {
+                    VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Image(systemName: "person.circle.fill")
-                                .foregroundColor(.blue)
-                                .font(.caption)
+                            Image(systemName: "person.2.fill")
+                                .foregroundStyle(.blue)
+                                .font(.title3)
                                 .accessibilityHidden(true)
-                            Text(author.name)
-                                .font(.subheadline)
+                            Text("Authors")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
                         }
                         .accessibilityElement(children: .combine)
-                    }
-                }
-                
-                // Publication Info
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Publication Info")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    HStack {
-                        Image(systemName: "calendar")
-                            .foregroundColor(.green)
-                            .accessibilityHidden(true)
-                        Text("Published: \(formattedDate(paper.published))")
-                            .font(.subheadline)
-                    }
-                    .accessibilityElement(children: .combine)
-                    
-                    if paper.updated != paper.published {
-                        HStack {
-                            Image(systemName: "arrow.clockwise")
-                                .foregroundColor(.orange)
-                                .accessibilityHidden(true)
-                            Text("Updated: \(formattedDate(paper.updated))")
-                                .font(.subheadline)
-                        }
-                        .accessibilityElement(children: .combine)
-                    }
-                    
-                    HStack {
-                        Image(systemName: "number")
-                            .foregroundColor(.purple)
-                            .accessibilityHidden(true)
-                        Text("ArXiv ID: \(paper.id)")
-                            .font(.subheadline)
-                            .textSelection(.enabled)
-                    }
-                    .accessibilityElement(children: .combine)
-                }
-                
-                // Categories
-                if !paper.categories.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Categories")
-                            .font(.headline)
-                            .foregroundColor(.primary)
                         
-                        LazyVGrid(columns: [
-                            GridItem(.adaptive(minimum: 100))
-                        ], spacing: 8) {
-                            ForEach(paper.categories, id: \.term) { category in
-                                Text(category.term)
-                                    .font(.caption)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color.blue.opacity(0.1))
-                                    .foregroundColor(.blue)
-                                    .cornerRadius(6)
+                        VStack(alignment: .leading, spacing: 8) {
+                            ForEach(paper.authors, id: \.name) { author in
+                                HStack(spacing: 8) {
+                                    Circle()
+                                        .fill(Color.blue.opacity(0.2))
+                                        .frame(width: 6, height: 6)
+                                        .accessibilityHidden(true)
+                                    Text(author.name)
+                                        .font(.subheadline)
+                                        .foregroundColor(.primary)
+                                }
+                                .accessibilityElement(children: .combine)
                             }
                         }
                     }
+                    .padding(.vertical, 4)
+                }
+                .groupBoxStyle(CustomGroupBoxStyle())
+                .padding(.horizontal, 20)
+                
+                // Publication Info Section
+                GroupBox {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundStyle(.green)
+                                .font(.title3)
+                                .accessibilityHidden(true)
+                            Text("Publication Details")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                        }
+                        .accessibilityElement(children: .combine)
+                        
+                        VStack(alignment: .leading, spacing: 10) {
+                            InfoRow(icon: "calendar", color: .green, label: "Published", value: formattedDate(paper.published))
+                            
+                            if paper.updated != paper.published {
+                                InfoRow(icon: "arrow.clockwise", color: .orange, label: "Updated", value: formattedDate(paper.updated))
+                            }
+                            
+                            InfoRow(icon: "number", color: .purple, label: "ArXiv ID", value: paper.id, isSelectable: true)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+                .groupBoxStyle(CustomGroupBoxStyle())
+                .padding(.horizontal, 20)
+                
+                // Categories Section
+                if !paper.categories.isEmpty {
+                    GroupBox {
+                        VStack(alignment: .leading, spacing: 12) {
+                            HStack {
+                                Image(systemName: "tag.fill")
+                                    .foregroundStyle(.blue)
+                                    .font(.title3)
+                                    .accessibilityHidden(true)
+                                Text("Categories")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.primary)
+                            }
+                            .accessibilityElement(children: .combine)
+                            
+                            LazyVGrid(columns: [
+                                GridItem(.adaptive(minimum: 120))
+                            ], spacing: 8) {
+                                ForEach(paper.categories, id: \.term) { category in
+                                    Text(category.term)
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
+                                        .background(
+                                            LinearGradient(
+                                                colors: [Color.blue.opacity(0.15), Color.blue.opacity(0.08)],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                        .foregroundColor(.blue)
+                                        .cornerRadius(10)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.blue.opacity(0.2), lineWidth: 0.5)
+                                        )
+                                }
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    .groupBoxStyle(CustomGroupBoxStyle())
+                    .padding(.horizontal, 20)
                 }
                 
-                // Abstract
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Abstract")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    Text(paper.abstract)
-                        .font(.body)
-                        .lineSpacing(4)
-                        .textSelection(.enabled)
+                // Abstract Section
+                GroupBox {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Image(systemName: "doc.text.fill")
+                                .foregroundStyle(.purple)
+                                .font(.title3)
+                                .accessibilityHidden(true)
+                            Text("Abstract")
+                                .font(.title3)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.primary)
+                        }
+                        .accessibilityElement(children: .combine)
+                        
+                        Text(paper.abstract)
+                            .font(.body)
+                            .lineSpacing(6)
+                            .textSelection(.enabled)
+                            .foregroundColor(.primary)
+                    }
+                    .padding(.vertical, 4)
                 }
+                .groupBoxStyle(CustomGroupBoxStyle())
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
             }
-            .padding()
         }
         .navigationTitle("Paper Details")
         .navigationBarTitleDisplayMode(.inline)
@@ -243,6 +295,69 @@ struct ShareSheet: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
         // No updates needed
+    }
+}
+
+// Custom GroupBox Style
+struct CustomGroupBoxStyle: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            configuration.content
+        }
+        .padding(16)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color(.secondarySystemBackground))
+                .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        )
+    }
+}
+
+// Info Row Component
+struct InfoRow: View {
+    let icon: String
+    let color: Color
+    let label: String
+    let value: String
+    let isSelectable: Bool
+    
+    init(icon: String, color: Color, label: String, value: String, isSelectable: Bool = false) {
+        self.icon = icon
+        self.color = color
+        self.label = label
+        self.value = value
+        self.isSelectable = isSelectable
+    }
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .foregroundStyle(color)
+                .font(.system(size: 16, weight: .medium))
+                .frame(width: 20)
+                .accessibilityHidden(true)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Text(label)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Group {
+                    if isSelectable {
+                        Text(value)
+                            .font(.subheadline)
+                            .foregroundColor(.primary)
+                            .textSelection(.enabled)
+                    } else {
+                        Text(value)
+                            .font(.subheadline)
+                            .foregroundColor(.primary)
+                    }
+                }
+            }
+            
+            Spacer()
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 
