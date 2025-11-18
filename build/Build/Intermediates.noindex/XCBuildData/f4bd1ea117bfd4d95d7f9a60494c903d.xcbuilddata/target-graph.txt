@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'Clarity' in project 'Clarity'
+➜ Explicit dependency on target 'ArxivKit' in project 'Clarity'
+Target 'ArxivKit' in project 'Clarity' (no dependencies)

@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivKit-primary.dia",
+    "emit-module-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivKit-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivKit-primary-emit-module.dia",
+    "pch" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivKit-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivKit-primary.swiftdeps"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/ArxivKit/Sources/AppState.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/AppState~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/ArxivKit/Sources/ArxivService.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/ArxivKit.build/Objects-normal/arm64/ArxivService~partial.swiftmodule"
+  }
+}

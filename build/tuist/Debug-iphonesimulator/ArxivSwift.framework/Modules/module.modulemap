@@ -1,0 +1,4 @@
+framework module ArxivSwift {
+  header "ArxivSwift-Swift.h"
+  requires objc
+}

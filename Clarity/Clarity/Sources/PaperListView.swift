@@ -6,6 +6,7 @@ struct PaperListView: View {
     @Environment(\.appState) private var appState
     @Environment(\.arxivService) private var arxivService
     @Bindable private var bindableAppState: AppState
+    @Environment(\.colorScheme) private var colorScheme
     
     init() {
         @Environment(\.appState) var appState
@@ -15,53 +16,27 @@ struct PaperListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Modern Background
-                ZStack {
-                    Color(.systemGroupedBackground)
-                        .ignoresSafeArea()
-                    
-                    // Ambient gradients
-                    GeometryReader { proxy in
-                        Circle()
-                            .fill(Color.blue.opacity(0.1))
-                            .frame(width: proxy.size.width * 0.8)
-                            .blur(radius: 60)
-                            .offset(x: -proxy.size.width * 0.2, y: -proxy.size.height * 0.2)
-                        
-                        Circle()
-                            .fill(Color.purple.opacity(0.1))
-                            .frame(width: proxy.size.width * 0.8)
-                            .blur(radius: 60)
-                            .offset(x: proxy.size.width * 0.4, y: proxy.size.height * 0.1)
-                    }
-                }
-                .ignoresSafeArea()
+                // Clean, native background
+                Color(.systemGroupedBackground)
+                    .ignoresSafeArea()
                 
                 Group {
                     if appState.isLoading {
-                        VStack(spacing: 24) {
-                            Image("loading-state")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 120, height: 120)
-                                .opacity(0.8)
-                            
-                            ProgressView()
-                                .scaleEffect(1.2)
-                                .tint(.blue)
-                            
-                            VStack(spacing: 8) {
-                                Text("Loading papers...")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.primary)
-                                
-                                Text("Discovering the latest research...")
-                                    .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                        // Placeholder skeletons for a faster perceived load
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                CategoryChipsRow(selected: appState.selectedCategory, categories: appState.availableCategories) { newCategory in
+                                    appState.selectedCategory = newCategory
+                                }
+                                .padding(.top, 4)
+                                .padding(.bottom, 4)
+
+                                ForEach(0..<6, id: \.self) { _ in
+                                    SkeletonRow()
+                                }
                             }
                         }
-                        .padding()
+                        .redacted(reason: .placeholder)
                         .transition(.opacity)
                     } else if appState.papers.isEmpty && appState.errorMessage == nil {
                         VStack(spacing: 24) {
@@ -129,20 +104,34 @@ struct PaperListView: View {
                         }
                         .padding()
                     } else {
-                        List(appState.papers, id: \.id) { paper in
-                            NavigationLink(destination: PaperDetailView(paper: paper)) {
-                                PaperRowView(paper: paper)
-                                    .listRowInsets(EdgeInsets())
-                                    .listRowSeparator(.hidden)
+                        VStack(spacing: 0) {
+                            CategoryChipsRow(selected: appState.selectedCategory, categories: appState.availableCategories) { newCategory in
+                                appState.selectedCategory = newCategory
+                                Task {
+                                    if appState.searchText.isEmpty {
+                                        await loadDefaultPapers()
+                                    } else {
+                                        await performSearch()
+                                    }
+                                }
                             }
-                        }
-                        .listStyle(.plain)
-                        .scrollContentBackground(.hidden)
-                        .refreshable {
-                            if appState.searchText.isEmpty {
-                                await loadDefaultPapers()
-                            } else {
-                                await performSearch()
+                            .padding(.vertical, 4)
+
+                            List(appState.papers, id: \.id) { paper in
+                                NavigationLink(destination: PaperDetailView(paper: paper)) {
+                                    PaperRowView(paper: paper)
+                                        .listRowInsets(EdgeInsets())
+                                        .listRowSeparator(.hidden)
+                                }
+                            }
+                            .listStyle(.plain)
+                            .scrollContentBackground(.hidden)
+                            .refreshable {
+                                if appState.searchText.isEmpty {
+                                    await loadDefaultPapers()
+                                } else {
+                                    await performSearch()
+                                }
                             }
                         }
                     }
@@ -154,6 +143,11 @@ struct PaperListView: View {
             .onSubmit(of: .search) {
                 Task {
                     await performSearch()
+                }
+            }
+            .searchSuggestions {
+                ForEach(appState.availableCategories, id: \.0) { _, name in
+                    Text(name).searchCompletion(name)
                 }
             }
             .onChange(of: appState.searchText) { oldValue, newValue in
@@ -235,6 +229,87 @@ struct PaperListView: View {
             print("❌ PaperListView: Error performing search: \(error)")
             appState.setError(error)
         }
+    }
+}
+
+// MARK: - Helper Views
+private func categoryColor(_ term: String) -> Color {
+    let top = term.split(separator: ".").first?.lowercased() ?? ""
+    switch top {
+    case "cs": return .blue
+    case "math": return .purple
+    case "physics": return .orange
+    case "q-bio": return .green
+    case "stat": return .teal
+    default: return .gray
+    }
+}
+
+private struct CategoryChipsRow: View {
+    let selected: String
+    let categories: [(String, String)]
+    var onSelect: (String) -> Void
+    @Environment(\.colorScheme) private var colorScheme
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(categories, id: \.0) { cat, name in
+                    let color = categoryColor(cat)
+                    Button(action: { onSelect(cat) }) {
+                        Text(name)
+                            .font(.caption).fontWeight(.semibold)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(
+                                Capsule().fill(
+                                    selected == cat
+                                    ? color.opacity(colorScheme == .dark ? 0.28 : 0.18)
+                                    : Color.secondary.opacity(colorScheme == .dark ? 0.10 : 0.08)
+                                )
+                            )
+                            .overlay(
+                                Capsule().stroke(
+                                    (selected == cat ? color : Color.secondary).opacity(0.35), lineWidth: 1
+                                )
+                            )
+                            .foregroundStyle(selected == cat ? color : .secondary)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 16)
+        }
+        .accessibilityLabel("Categories")
+    }
+}
+
+private struct SkeletonRow: View {
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("Title placeholder\nline two")
+                .font(.title3).fontWeight(.semibold)
+                .lineLimit(2)
+            HStack(spacing: 6) {
+                Image(systemName: "person.2.fill").font(.caption)
+                Text("Author names placeholder")
+                    .font(.callout)
+            }
+            HStack {
+                Label("Date", systemImage: "calendar").font(.caption)
+                Spacer()
+                Text("cs.AI").font(.caption)
+            }
+        }
+        .padding(20)
+        .background(Color(.systemBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.primary.opacity(0.06), lineWidth: 1)
+        )
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 }
 

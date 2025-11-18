@@ -8,6 +8,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "io.tuist.Clarity",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchScreen": [
@@ -39,6 +40,7 @@ let project = Project(
             destinations: .iOS,
             product: .framework,
             bundleId: "io.tuist.ArxivKit",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
             sources: ["ArxivKit/Sources/**"],
             resources: [],
@@ -51,6 +53,7 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: "io.tuist.ClarityTests",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
             sources: ["Clarity/Tests/**"],
             resources: [],
@@ -66,6 +69,7 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: "io.tuist.ArxivKitTests",
+            deploymentTargets: .iOS("17.0"),
             infoPlist: .default,
             sources: ["ArxivKit/Tests/**"],
             resources: [],

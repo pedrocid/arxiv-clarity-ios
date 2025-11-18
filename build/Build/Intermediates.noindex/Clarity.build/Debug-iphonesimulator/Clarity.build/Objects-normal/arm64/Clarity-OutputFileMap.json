@@ -1,0 +1,89 @@
+{
+  "" : {
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/Clarity-primary.dia",
+    "emit-module-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/Clarity-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/Clarity-primary-emit-module.dia",
+    "pch" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/Clarity-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/Clarity-primary.swiftdeps"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Clarity/Sources/ClarityApp.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ClarityApp~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Clarity/Sources/ContentView.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Clarity/Sources/PaperDetailView.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperDetailView~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Clarity/Sources/PaperListView.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperListView~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Clarity/Sources/PaperRowView.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/PaperRowView~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Derived/Sources/TuistAssets+Clarity.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistAssets+Clarity~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/Clarity/Derived/Sources/TuistBundle+Clarity.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/TuistBundle+Clarity~partial.swiftmodule"
+  },
+  "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/pedrocid/Programming/iOS/arxiv-clarity-ios/build/Build/Intermediates.noindex/Clarity.build/Debug-iphonesimulator/Clarity.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}
